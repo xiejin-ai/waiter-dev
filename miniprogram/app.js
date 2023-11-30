@@ -12,7 +12,7 @@ App({
     let self = this
     if (wx.cloud) {
       wx.cloud.init({
-        env: 'dev-3r8qc',
+        env: 'xiejin-cy-5gjhbvtvae6fb301',
         // env: 'pro-043xs',
         traceUser: true
       })
@@ -102,6 +102,7 @@ App({
     let self = this
     wx.cloud.database().collection('config').where({}).watch({
       onChange: function(snapshot) {
+      
         console.log('connect config')
         self.loadTable()
         self.loadColumn()
@@ -114,6 +115,7 @@ App({
         } catch (e) {}
       },
       onError: function(err) {
+        console.log(err)
         console.log('reconnect config')
         setTimeout(() => {
           self.listenConfig()
@@ -228,11 +230,13 @@ App({
     let self = this
     wx.getSetting({
       success(res) {
+
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             lang: 'zh_CN',
             success: function (res) {
               self.globalData.userInfo = res.userInfo
+              console.log(res.userInfo);
               try {
                 self.userInfoReadyCallback()
               } catch (e) { }
@@ -271,6 +275,7 @@ App({
                   }
                 }
               }).catch(err => {
+                console.log(err)
                 wx.showToast({
                   title: '系统繁忙',
                   icon: 'none',

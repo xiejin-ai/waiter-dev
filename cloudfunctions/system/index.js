@@ -207,6 +207,7 @@ class System {
           identity: identity
         }
       } else {
+        console.log(userInfo)
         res = await db.collection('user').add({
           data: {
             openid: openid,
@@ -303,6 +304,7 @@ class System {
         is_deleted: false
       }).get()
       let openids = []
+      
       res.data.forEach(item=>{
         openids.push(item.openid)
       })

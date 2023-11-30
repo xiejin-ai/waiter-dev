@@ -93,7 +93,11 @@ Page({
       app.identityReadyCallback = () => {
         self.init()
       }
-      app.authorize()
+      app.authorize({
+        fail: (e) => {
+          console.log(e)
+        }
+      })
     }
   },
   onShow() {
@@ -322,7 +326,7 @@ Page({
       })
     }
   },
-  filter() { 
+  filter() {
     this.setData({
       'filter.grain': '',
       'filter.date': '',
@@ -409,11 +413,11 @@ Page({
   },
   scanCode() {
     let self = this
-    if (self.data.curTab=='inside') {
+    if (self.data.curTab == 'inside') {
       wx.navigateTo({
         url: 'inside/collect'
       })
-    } else if (self.data.curTab=='outside') {
+    } else if (self.data.curTab == 'outside') {
       wx.navigateTo({
         url: 'outside/collect'
       })
